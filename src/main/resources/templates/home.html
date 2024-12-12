@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+</head>
+<body>
+<h1>안녕하세요, <span th:text="${session.nickname}">닉네임</span>님!</h1>
+
+<!-- 로그아웃 링크 -->
+<p><a href="/logout">로그아웃</a></p>
+
+<!-- 회원 탈퇴 버튼 -->
+<form action="/delete-user" method="post" style="display:inline;">
+    <button type="submit" style="color: red; background: none; border: none; cursor: pointer;">
+        회원 탈퇴
+    </button>
+</form>
+
+</body>
+</html>

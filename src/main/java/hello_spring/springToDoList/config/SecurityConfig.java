@@ -15,21 +15,20 @@ public class SecurityConfig {
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-//        String encodedPassword = encoder.encode("admin");
-//        System.out.println("인코딩 pw");
-//        System.out.println(encodedPassword);  // 콘솔에 출력된 값을 복사합니다.
         return new BCryptPasswordEncoder();
     }
-    
+
     @Bean // 첫 사용자 로그인 기능 없애줌
     SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http 
+        http
+                .csrf(csrf->csrf.disable()) //csrf 비활성화
                 .authorizeHttpRequests((authorizeHttpRequests) -> authorizeHttpRequests
                         .requestMatchers(new AntPathRequestMatcher("/**")).permitAll()
                 )
         ;
         return http.build();
     }
+
 }
 
 
