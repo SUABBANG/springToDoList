@@ -1,14 +1,12 @@
 package hello_spring.springToDoList.domain;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "todoitems")
 public class TodoItems {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "item_id")
     private Long itemId;
     @Column(name = "list_id")

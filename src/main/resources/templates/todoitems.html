@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Todo Items</title>
+</head>
+<body>
+<h1>Todo Items for List: <span th:text="${listId}"></span></h1>
+
+<!-- Add New Item Form -->
+<h2>Add New Item</h2>
+<form th:action="@{'/todolist/item/add/' + ${listId}}" method="post">
+    <input type="text" name="itemTitle" placeholder="Item Title" required>
+    <textarea name="itemDescription" placeholder="Description"></textarea>
+    <select name="statusCode">
+        <option value="0">Incomplete</option>
+        <option value="1">In Progress</option>
+        <option value="2">Completed</option>
+    </select>
+    <button type="submit">Add Item</button>
+</form>
+
+<h2>Existing Items</h2>
+<!-- Display Todo Items -->
+<ul>
+    <li th:each="item : ${todoItems}">
+        <div>
+            <!-- Display Item Details -->
+            <strong>Title:</strong> <span th:text="${item.itemTitle}"></span><br>
+            <strong>Description:</strong> <span th:text="${item.itemDescription}"></span><br>
+            <strong>Status:</strong>
+            <span th:text="${item.statusCode == 2 ? 'Completed' : (item.statusCode == 1 ? 'In Progress' : 'Incomplete')}"></span><br>
+
+            <!-- Update Item Form -->
+            <form th:action="@{'/todolist/item/update/' + ${item.itemId}}" method="post">
+                <h3>Update Item</h3>
+                <input type="text" name="itemTitle" th:placeholder="${item.itemTitle}" required>
+                <textarea name="itemDescription" th:placeholder="${item.itemDescription}"></textarea>
+                <select name="statusCode">
+                    <option value="0" th:selected="${item.statusCode == 0}">Incomplete</option>
+                    <option value="1" th:selected="${item.statusCode == 1}">In Progress</option>
+                    <option value="2" th:selected="${item.statusCode == 2}">Completed</option>
+                </select>
+                <button type="submit">Update</button>
+            </form>
+
+            <!-- Delete Item Form -->
+            <form th:action="@{'/todolist/item/delete/' + ${item.itemId}}" method="post">
+                <button type="submit">Delete</button>
+            </form>
+        </div>
+    </li>
+</ul>
+
+<!-- Back to Todo Lists -->
+<a href="/todolist">Back to Todo Lists</a>
+</body>
+</html>

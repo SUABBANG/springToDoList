@@ -49,7 +49,7 @@ public class TodoLists {
     public String setListDescription() {
         return listDescription;
     }
-    public void getListDescription(String listDescription){
-        this.listDescription=listDescription;
+    public void getListDescription(String listDescription) {
+        this.listDescription = listDescription;
     }
 }

@@ -1,0 +1,12 @@
+<h1>Todo Lists</h1>
+<form action="/todolist/add" method="post">
+    <input type="text" name="listTitle" placeholder="List Title" required>
+    <textarea name="listDescription" placeholder="Description"></textarea>
+    <button type="submit">Add List</button>
+</form>
+
+<ul>
+    <li th:each="list : ${todoLists}">
+        <a th:href="@{'/todolist/list/' + ${list.listId}}" th:text="${list.listTitle}"></a>
+    </li>
+</ul>
